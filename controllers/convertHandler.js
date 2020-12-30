@@ -17,13 +17,15 @@ function ConvertHandler() {
       // Get input number
       const regAlpha = /^[a-zA-Z]+$/;
       const inputNum = inputSplit.filter(num => !num.match(regAlpha)).join('');
+      const slash = inputSplit.filter(d => d === '/');
 
-      // Correct decimal and fraction
-
-      if (isNaN(inputNum)) {
-        return null;
-      } else {
+      // Check if fraction first, then nan, then eval
+      if (slash.length === 1) {
         return eval(inputNum);
+      } else if (!isNaN(inputNum)) {
+        return eval(inputNum);
+      } else {
+        return null;
       }
     }
   };
@@ -36,15 +38,36 @@ function ConvertHandler() {
     const regAlpha = /^[a-zA-Z]+$/;
     const inputUnit = inputSplit.filter(unit => unit.match(regAlpha)).join('');
 
-    const metricArray = ['gal', 'L', 'lbs', 'kg', 'mi', 'km'];
+    const metricArray = [
+      'gal',
+      'l',
+      'mi',
+      'km',
+      'lbs',
+      'kg',
+      'GAL',
+      'L',
+      'MI',
+      'KM',
+      'LBS',
+      'KG',
+    ];
 
-    if (inputUnit === 'l') {
+    if (inputUnit === 'l' || inputUnit === 'L') {
       return inputUnit.toUpperCase();
-    } else if (metricArray.indexOf(inputUnit) < 1) {
-      return undefined;
-    } else {
+    } else if (metricArray.indexOf(inputUnit) > -1) {
       return inputUnit.toLowerCase();
+    } else {
+      return undefined;
     }
+
+    // if (inputUnit === 'l') {
+    //   return inputUnit.toUpperCase();
+    // } else if (metricArray.indexOf(inputUnit) < 0) {
+    //   return undefined;
+    // } else {
+    //   return inputUnit;
+    // }
 
     // return inputUnit === 'l'
     //   ? inputUnit.toUpperCase()
@@ -56,7 +79,7 @@ function ConvertHandler() {
   this.getReturnUnit = function (initUnit) {
     if (initUnit === 'gal') {
       return 'L';
-    } else if (initUnit === 'L') {
+    } else if (initUnit === 'L' || initUnit === 'l') {
       return 'gal';
     } else if (initUnit === 'lbs') {
       return 'kg';
@@ -66,21 +89,23 @@ function ConvertHandler() {
       return 'km';
     } else if (initUnit === 'km') {
       return 'mi';
+    } else {
+      return 'error';
     }
   };
 
-  this.spellOutUnit = function (unit) {
-    if (unit === 'gal') {
+  this.spellOutUnit = function (initUnit) {
+    if (initUnit === 'gal') {
       return 'gallon';
-    } else if (unit === 'L') {
+    } else if (initUnit === 'L' || initUnit === 'l') {
       return 'liter';
-    } else if (unit === 'lbs') {
+    } else if (initUnit === 'lbs') {
       return 'pound';
-    } else if (unit === 'kg') {
+    } else if (initUnit === 'kg') {
       return 'kilogram';
-    } else if (unit === 'mi') {
+    } else if (initUnit === 'mi') {
       return 'mile';
-    } else if (unit === 'km') {
+    } else if (initUnit === 'km') {
       return 'kilometer';
     }
   };

@@ -45,8 +45,8 @@ suite('Unit Tests', function () {
     });
 
     test('No Numerical Input', function (done) {
-      let input = null;
-      assert.equal(convertHandler.getNum(null), 1);
+      let input = '';
+      assert.equal(convertHandler.getNum(input), 1);
       done();
     });
   });
@@ -68,7 +68,10 @@ suite('Unit Tests', function () {
         'KG',
       ];
       input.forEach(function (ele) {
-        assert.equal(convertHandler.getUnit(ele), input[i]);
+        assert.equal(
+          convertHandler.getUnit(ele).toLowerCase(),
+          ele.toLowerCase()
+        );
       });
       done();
     });
@@ -94,7 +97,14 @@ suite('Unit Tests', function () {
   suite('Function convertHandler.spellOutUnit(unit)', function () {
     test('For Each Valid Unit Inputs', function (done) {
       let input = ['gal', 'l', 'mi', 'km', 'lbs', 'kg'];
-      let expect = ['galon', 'liter', 'mile', 'kilometer', 'pound', 'kilogram'];
+      let expect = [
+        'gallon',
+        'liter',
+        'mile',
+        'kilometer',
+        'pound',
+        'kilogram',
+      ];
       input.forEach(function (ele, i) {
         assert.equal(convertHandler.spellOutUnit(ele), expect[i]);
       });
