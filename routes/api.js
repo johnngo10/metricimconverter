@@ -29,11 +29,11 @@ module.exports = function (app) {
       returnUnit
     );
 
-    if (initUnit === undefined && initNum === null) {
+    if (initUnit === 'invalid unit' && initNum === 'invalid number') {
       res.send('invalid number and unit');
-    } else if (initUnit === undefined) {
+    } else if (initUnit === 'invalid unit') {
       res.send('invalid unit');
-    } else if (initNum === null) {
+    } else if (initNum === 'invalid number') {
       res.send('invalid number');
     } else {
       res.json({

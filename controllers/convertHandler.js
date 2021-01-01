@@ -25,7 +25,7 @@ function ConvertHandler() {
       } else if (!isNaN(inputNum)) {
         return eval(inputNum);
       } else {
-        return null;
+        return 'invalid number';
       }
     }
   };
@@ -58,7 +58,7 @@ function ConvertHandler() {
     } else if (metricArray.indexOf(inputUnit) > -1) {
       return inputUnit.toLowerCase();
     } else {
-      return undefined;
+      return 'invalid unit';
     }
 
     // if (inputUnit === 'l') {

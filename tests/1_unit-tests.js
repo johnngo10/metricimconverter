@@ -40,7 +40,7 @@ suite('Unit Tests', function () {
 
     test('Invalid Input (double fraction)', function (done) {
       let input = '5/5/5km';
-      assert.isNull(convertHandler.getNum(input), null);
+      assert.equal(convertHandler.getNum(input), 'invalid number');
       done();
     });
 
@@ -78,7 +78,7 @@ suite('Unit Tests', function () {
 
     test('Unknown Unit Input', function (done) {
       let input = 'kmkmkm';
-      assert.isUndefined(convertHandler.getUnit(input), undefined);
+      assert.equal(convertHandler.getUnit(input), 'invalid unit');
       done();
     });
   });
