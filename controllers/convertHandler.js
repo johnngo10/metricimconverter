@@ -60,20 +60,6 @@ function ConvertHandler() {
     } else {
       return 'invalid unit';
     }
-
-    // if (inputUnit === 'l') {
-    //   return inputUnit.toUpperCase();
-    // } else if (metricArray.indexOf(inputUnit) < 0) {
-    //   return undefined;
-    // } else {
-    //   return inputUnit;
-    // }
-
-    // return inputUnit === 'l'
-    //   ? inputUnit.toUpperCase()
-    //   : inputUnit === 'L'
-    //   ? inputUnit
-    //   : inputUnit.toLowerCase();
   };
 
   this.getReturnUnit = function (initUnit) {

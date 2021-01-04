@@ -37,8 +37,6 @@ suite('Functional Tests', function () {
           .get('/api/convert')
           .query({ input: '32g' })
           .end(function (err, res) {
-            // assert.equal(res.status, 200);
-            // assert.equal(res.body.initNum, 32);
             assert.isUndefined(res.body.initUnit, undefined);
             done();
           });
